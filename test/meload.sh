@@ -9,13 +9,13 @@ dir_suckless=dir_src/suckless
 sudo pacman -Syyu
 
 ## install base packages
-sudo pacman -S base-devel libx11 libxinerama yay vim git alacritty picom conky bluez network-manager-applet kdeconnect sxiv zathura mpv moc redshift sxhkd thunar virtualbox obs-studio code telegram-desktop torbrowser-launcher scrot neomutt inkscape lxappearance speedcrunch gedit vlc uget firefox emacs bitwarden audacity gimp youtube-dl optimus-manager zsh jq pup syncthing curl stow transmission-cli
+sudo pacman -S base-devel libx11 libxinerama yay vim git alacritty picom conky bluez network-manager-applet kdeconnect sxiv zathura mpv moc redshift sxhkd thunar virtualbox obs-studio code telegram-desktop torbrowser-launcher scrot neomutt inkscape lxappearance speedcrunch gedit vlc uget firefox emacs bitwarden audacity gimp youtube-dl optimus-manager zsh jq pup syncthing curl stow transmission-cli dunst
 
 ## update AUR packages
 yay -Syu
 
 ## install from AUR
-yay -S artha anydesk-bin rambox safeeyes balena-etcher libxft-bgra lightdm-webkit-theme-aether stremio optimus-manager-qt xmenu betterlockscreen python-pywal 
+yay -S artha anydesk-bin rambox safeeyes balena-etcher libxft-bgra lightdm-webkit-theme-aether stremio optimus-manager-qt xmenu betterlockscreen python-pywal otpclient
 
 ## persinal scripts
 git clone https://github.com/mrbooshehri/scripts.git
