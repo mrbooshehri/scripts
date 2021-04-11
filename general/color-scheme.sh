@@ -9,6 +9,11 @@ bash ~/github/telegram-palette-gen/telegram-palette-gen --wal
 ln -sf ~/.cache/wal/config.rasi ~/.config/rofi/config
 ln -sf ~/.cache/wal/Xresources  ~/.Xresources
 
+## conky
+ln -sf ~/.cache/wal/conkyrc ~/.conkyrc
+pkill conky
+conky &
+
 ## dunst
 ln -sf ~/.cache/wal/dunstrc ~/.config/dunst/dunstrc
 pkill dunst
