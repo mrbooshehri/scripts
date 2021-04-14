@@ -16,7 +16,7 @@ mkdir -p $dir_tmp
 
 notify-send "  Downloading..."
 
-wget -qnc -P $dir_tmp $(curl -s -H "User-Agent: 'your bot 0.1'"  https://www.reddit.com/r/wallpaper/hot.json\?limit\=20 | jq --raw-output '.data.children[].data.url' | grep -Eoh 'https://.+.[jpg,png]$')
+wget -qnc -P $dir_tmp $(curl -s -H "User-Agent: 'your bot 0.1'"  https://www.reddit.com/r/wallpaper/hot.json\?limit\=50 | jq --raw-output '.data.children[].data.url' | grep -Eoh 'https://.+.[jpg,png]$')
 
 notify-send "  All files downloaded"
 
