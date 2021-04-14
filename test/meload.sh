@@ -3,13 +3,13 @@
 ## variables
 dir_home=$HOME
 dir_src=$dir_home/.src
-dir_suckless=dir_src/suckless
+dir_suckless=$dir_src/suckless
 
 ## update system
 sudo pacman -Syyu
 
 ## install base packages
-sudo pacman -S base-devel libx11 libxinerama yay vim git alacritty picom conky bluez network-manager-applet kdeconnect sxiv zathura mpv moc redshift sxhkd thunar virtualbox obs-studio code telegram-desktop torbrowser-launcher scrot neomutt inkscape lxappearance speedcrunch gedit vlc uget firefox emacs bitwarden audacity gimp youtube-dl optimus-manager zsh jq pup syncthing curl stow transmission-cli dunst
+sudo pacman -S base-devel libx11 libxinerama yay vim git alacritty picom conky bluez network-manager-applet kdeconnect sxiv zathura mpv moc redshift sxhkd thunar virtualbox obs-studio code telegram-desktop torbrowser-launcher scrot neomutt inkscape lxappearance speedcrunch gedit firefox emacs bitwarden audacity gimp youtube-dl optimus-manager zsh jq pup syncthing curl stow transmission-cli dunst lxsession
 
 ## update AUR packages
 yay -Syu
@@ -31,10 +31,10 @@ git clone https://github.com/agnipau/telegram-palette-gen.git $dir_src
 
 ## suckless setup
 mkdir -p $dir_suckless
-git clone https://github.com/mrbooshehri/dwm.git $dir_suckless
-git clone https://github.com/mrbooshehri/dmenu.git $dir_suckless
-git clone https://github.com/mrbooshehri/st.git $dir_suckless
-git clone https://github.com/mrbooshehri/dwmblocks.git $dir_suckless
+git clone https://github.com/mrbooshehri/dwm.git $dir_suckless/dwm
+git clone https://github.com/mrbooshehri/dmenu.git $dir_suckless/dmenu
+git clone https://github.com/mrbooshehri/st.git $dir_suckless/st
+git clone https://github.com/mrbooshehri/dwmblocks.git $dir_suckless/dwmblocks
 
 ## install dwm
 cd $dir_suckless/dwm
