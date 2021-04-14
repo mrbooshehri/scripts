@@ -19,9 +19,10 @@ else
   query=$1
 fi
 
-if [ -z $query ]; then
-  exit
-fi
+#if [ -z $query ]; then
+#  exit
+#fi
+[ -z $query ] && exit 1
 
 sortoptions="date_added\nrelevance\nrandom\nfavorites\ntoplist"
 sorting=$(echo -e $sortoptions | dmenu -p "Sort order: ")
