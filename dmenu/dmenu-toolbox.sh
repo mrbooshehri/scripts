@@ -11,6 +11,7 @@ ARR=()
 ARR+=("Dictionary")
 ARR+=("Pirokit")
 ARR+=("Ytfzf")
+ARR+=("Redyt")
 ARR+=("OBS-remote")
 ARR+=("Reddit-wall")
 ARR+=("Wallhaven-wall")
@@ -24,6 +25,8 @@ case $CHOICE in
     ~/.src/pirokit/pirokit ;;
   "Ytfzf")
     ~/.src/ytfzf/ytfzf -D ;;
+  "Redyt")
+    ~/.src/redyt/redyt ;;
   "obs-remote")
     ~/scripts/dmenu/dmenu-obs.sh ;;
   "Reddit-wall")
