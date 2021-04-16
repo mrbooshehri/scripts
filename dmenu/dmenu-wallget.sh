@@ -48,7 +48,9 @@ echo $query
 # Asking for sorting option
 sortoptions="date_added\nrelevance\nrandom\nfavorites\ntoplist"
 sorting=$(echo -e $sortoptions | dmenu -p "Sort order: ")
+[ -z "$sorting "] && exit 1
 
+#           "Title"   "Message"
 notify-send "Wallget" "  Downloading..."
 
 for i in $(seq 1 2);
@@ -58,10 +60,13 @@ do
   wget -nc -P $dir_tmp $page
 done
 
-rm tmp.txt
 notify-send "Wallget" "  All files have downloaded"
-
+#
+# Show downloaded files
 sxiv -t $dir_tmp/*
 
+# Remove temp files
+rm tmp.txt
 mv $dir_tmp/* $dir_repo
+
 notify-send "Wallget" "  Files moved to $dir_repo"
