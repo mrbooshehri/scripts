@@ -22,7 +22,7 @@ sort_option=$(echo -e "hot\nnew\ntop" | dmenu -p "Sort option: ")
 
 notify-send "Waldl" "  Downloading..."
 
-wget -qnc -P $dir_tmp $(curl -s -H "User-Agent: 'your bot 0.1'"  https://www.reddit.com/r/$subreddit/$sort_option.json\?limit\=5 | jq --raw-output '.data.children[].data.url' | grep -Eoh 'https://.+.[jpg,png]$')
+wget -qnc -P $dir_tmp $(curl -s -H "User-Agent: 'your bot 0.1'"  https://www.reddit.com/r/$subreddit/$sort_option.json\?limit\=50 | jq --raw-output '.data.children[].data.url' | grep -Eoh 'https://.+.[jpg,png]$')
 
 notify-send "Waldl" "  All files have downloaded"
 
