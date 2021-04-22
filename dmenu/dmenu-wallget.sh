@@ -26,7 +26,7 @@ api=9VxdYyf7irmZl8tIv6x6BSy7bylSKtUb
 
 ## Sample tag
 header="#Category\t\t\tTag"
-default="minimalism\t\t\t2278"
+default="Minimalism\t\t\t2278"
 
 # If subbreddit.txt does not exist, create it to prevent
 # the program from not functioning properly
@@ -48,7 +48,7 @@ echo $query
 # Asking for sorting option
 sortoptions="date_added\nrelevance\nrandom\nfavorites\ntoplist"
 sorting=$(echo -e $sortoptions | dmenu -p "Sort order: ")
-[ -z "$sorting "] && exit 1
+[ -z "$sorting" ] && exit 1
 
 #           "Title"   "Message"
 notify-send "Wallget" "  Downloading..."
