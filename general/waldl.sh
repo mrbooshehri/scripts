@@ -14,7 +14,7 @@ dir_tmp="/tmp/wallpaper"
 mkdir -p $dir_repo
 mkdir -p $dir_tmp
 
-subreddit=$(echo -e "wallpaper\nwallpapers\nMinimalWallpaper" | dmenu -p "Select subreddit: ")
+subreddit=$(echo -e "wallpaper\nwallpapers\nMinimalWallpaper\nportraits" | dmenu -p "Select subreddit: ")
 [ -z "$subreddit" ] && exit 1
 
 sort_option=$(echo -e "hot\nnew\ntop" | dmenu -p "Sort option: ")
