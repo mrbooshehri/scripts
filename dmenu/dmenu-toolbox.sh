@@ -9,6 +9,7 @@
 
 ARR=()
 ARR+=("Dictionary")
+ARR+=("Colorscheme")
 ARR+=("Pirokit")
 ARR+=("Ytfzf")
 ARR+=("Lyrics")
@@ -22,6 +23,8 @@ CHOICE=$(printf '%s\n' "${ARR[@]}" | dmenu)
 case $CHOICE in
   "Dictionary")
     ~/scripts/dmenu/dmenu-dict.sh ;;
+  "Colorscheme")
+    ~/scripts/dmenu/dmenu-wal-colorscheme.sh ;;
   "Pirokit")
     ~/.src/pirokit/pirokit ;;
   "Ytfzf")
