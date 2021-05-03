@@ -85,18 +85,32 @@ pkill dunst
 dunst &
 
 # gtk theme 
-dir_conf=~/.config/gtk-3.0/settings.ini
+file_conf=~/.config/gtk-3.0/settings.ini
 
-sed -i '/gtk-theme-name/d' $dir_conf
-sed -i '/gtk-icon-theme-name/d' $dir_conf
+sed -i '/gtk-theme-name/d' $file_conf
+sed -i '/gtk-icon-theme-name/d' $file_conf
 
 case $isDark in
   0)
-    echo "gtk-theme-name=Matcha-light-aliz" >> $dir_conf
-    echo "gtk-icon-theme-name=deepin" >> $dir_conf
+    echo "gtk-theme-name=Matcha-light-aliz" >> $file_conf
+    echo "gtk-icon-theme-name=deepin" >> $file_conf
     ;;
   1)
-    echo "gtk-theme-name=Matcha-dark-aliz" >> $dir_conf 
-    echo "gtk-icon-theme-name=deepin-dark" >> $dir_conf
+    echo "gtk-theme-name=Matcha-dark-aliz" >> $file_conf 
+    echo "gtk-icon-theme-name=deepin-dark" >> $file_conf
+    ;;
+esac
+
+# kde theme
+file_conf=~/.config/Kvantum/kvantum.kvconfig
+
+sed -i '/theme/d' $file_conf
+
+case $isDark in
+  0)
+    echo "theme=Matchama-Light-Aliz" >> $file_conf 
+    ;;
+  1)
+    echo "theme=Matchama-Dark-Aliz" >> $file_conf
     ;;
 esac
