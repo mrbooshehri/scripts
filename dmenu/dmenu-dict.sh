@@ -9,6 +9,6 @@ if [ ! -z $word ]; then
 	if [ ! -z $selected ]; then
 	  	echo "$word = $selected" >> ~/notes/vocab.md
 		echo $selected | xsel -bi
-		notify-send -t 2000 -u normal "[ $selected ] copied to clipboard."
+		notify-send -t 2000 -u normal "  [ $selected ] copied to clipboard."
 	fi
 fi
