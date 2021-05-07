@@ -1,3 +1,4 @@
+#! /bin/bash
 #                _                     _          _          _ 
 #               | |                   | |        | |        (_)
 # _ __ ___  _ __| |__   ___   ___  ___| |__   ___| |__  _ __ _ 
@@ -5,21 +6,19 @@
 #| | | | | | |  | |_) | (_) | (_) \__ \ | | |  __/ | | | |  | |
 #|_| |_| |_|_|  |_.__/ \___/ \___/|___/_| |_|\___|_| |_|_|  |_|
 
-#! /bin/bash
-
 wallpaper_repo=/mnt/1TB/Pictures/Wallpaper.repo
 menu_items='Random\nDark\nLight'
-choice=$(printf $menu_items | dmenu -p "Colorscheme: ")
+choice=$(printf '%b\n' "$menu_items" | dmenu -p "Colorscheme: ")
 isDark=0
 
 case $choice in 
   Random)
     menu_items='No\nYes'
-    choice=$(printf $menu_items | dmenu -p 'Do you want to change wallpaper too? ')
+    choice=$(printf '%b\n' "$menu_items" | dmenu -p 'Do you want to change wallpaper too? ')
     case $choice in
       No)
     	menu_items='Dark\nLight'
-    	choice=$(printf $menu_items | dmenu -p 'Select mode: ')
+    	choice=$(printf '%b\n' "$menu_items" | dmenu -p 'Select mode: ')
 	case $choice in
 	  Dark) wal --theme random_dark
 	    	isDark=1;;
@@ -28,7 +27,8 @@ case $choice in
 	  *) exit 1;;
 	esac
 	;;
-      Yes) wal -i $wallpaper_repo/$(ls $wallpaper_repo | shuf | head -1)
+      #Yes) wal -i $wallpaper_repo/$(ls $wallpaper_repo | shuf | head -1)
+	Yes) wal -i "$(find "$wallpaper_repo" -regextype egrep -regex '.*\.(jpg|png)')"
 	   isDark=0 ;;
       *) exit 1
     ;;
@@ -36,21 +36,21 @@ case $choice in
     ;;
   Dark)
     menu_items='3024\nashes\napathy\ngruvbox\nflat\ndracula\nsolarized'
-    choice=$(printf $menu_items | dmenu -p 'Dark schemes: ')
+    choice=$(printf '%b\n' "$menu_items" | dmenu -p 'Dark schemes: ')
     case $choice in 
       3024) wal --theme 3024;;
       ashes) wal --theme ashes;;
       gruvbox) wal --theme base16-gruvbox-hard	;;
-      apathy | flat | dracula | solarized) wal --theme base16-$choice ;;
+      apathy | flat | dracula | solarized) wal --theme base16-"$choice" ;;
       *) exit 1
     esac
     isDark=1
     ;;
   Light) 
     menu_items='one\ngruvbox\nsolarized\nmexico\ntomorrow'
-    choice=$(printf $menu_items | dmenu -p 'Light schemes: ')
+    choice=$(printf '%b\n' "$menu_items" | dmenu -p 'Light schemes: ')
     case $choice in 
-      one | solarized | mexico | tomorrow) wal --theme base16-$choice -l ;;
+      one | solarized | mexico | tomorrow) wal --theme base16-"$choice" -l ;;
       gruvbox) wal --theme base16-gruvbox-soft -l ;;
       *) exit 1
     esac

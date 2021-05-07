@@ -8,16 +8,16 @@
 PID=$(ps -U mhmd u | sed '1d' | awk '{print $2, " | ", $3, " | ", $4, " | ", $11}' | dmenu -l 15 | cut -d " " -f 1)
 
 # check if $PID is not null
-if [ ! -z $PID ]; then
+if [[ -n $PID ]]; then
   # kill the selected process with default signal (-9)
-	kill $PID
+	kill "$PID"
 	# check the result of kill command and send related notification
 	case $? in
 	  "0")
-	    notify-send -t 2000 -u low "Process terminated successfully";;
+	    notify-send -t 2000 -u low "  Process terminated successfully";;
 	  "1")
-	    notify-send -t 2000 -u urgent "Process termination failed";;
+	    notify-send -t 2000 -u urgent "  Process termination failed";;
 	  "64")
-	    notify-send -t 2000 -u normal "Process terminated partial successful";;
+	    notify-send -t 2000 -u normal "  Process terminated partial successful";;
 	esac
 fi
