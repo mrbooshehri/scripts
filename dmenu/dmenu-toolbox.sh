@@ -17,6 +17,7 @@ ARR+=("Redyt")
 ARR+=("OBS-remote")
 ARR+=("Reddit-wall")
 ARR+=("Wallhaven-wall")
+ARR+=("Change-wall")
 
 CHOICE=$(printf '%s\n' "${ARR[@]}" | dmenu)
 
@@ -39,4 +40,6 @@ case $CHOICE in
     ~/scripts/general/waldl.sh ;;
   "Wallhaven-wall")
     ~/scripts/dmenu/dmenu-wallget.sh ;;
+  "Change-wall")
+    ~/scripts/dmenu/dmenu-wal-change.sh ;;
 esac
