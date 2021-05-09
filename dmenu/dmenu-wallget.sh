@@ -52,7 +52,7 @@ sorting=$(echo -e $sortoptions | dmenu -p "Sort order: ")
 #           "Title"   "Message"
 notify-send "Wallget" "  Downloading..."
 
-for i in $(seq 1 2);
+for i in $(seq 1 5);
 do
   curl -s https://wallhaven.cc/api/v1/search\?apikey\=$api\&atleast\=1920x1080\&sorting\=$sorting\&q\=$query\&page\=$i > tmp.txt
   page=$(cat tmp.txt | jq --raw-output '.data[].path')
