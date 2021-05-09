@@ -12,6 +12,7 @@ ARR+=("Colorscheme")
 ARR+=("Pirokit")
 ARR+=("Ytfzf")
 ARR+=("Lyrics")
+ARR+=("Mitype")
 ARR+=("Redyt")
 ARR+=("OBS-remote")
 ARR+=("Reddit-wall")
@@ -31,6 +32,8 @@ case $CHOICE in
     ~/.src/ytfzf/ytfzf -D ;;
   "Lyrics")
     ~/scripts/dmenu/dmenu-lyrics.sh;;
+  "Mitype")
+    ~/scripts/general/type-test.sh;;
   "Redyt")
     ~/.src/redyt/redyt ;;
   "obs-remote")
