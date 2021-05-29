@@ -17,6 +17,7 @@ case $1 in
       	notify-send -t 3000 "Scrot [ Selected area]" "Screenshot taken\n$n"';;
 
   *) scrot $dir_repo/%Y-%m-%d_screenshot.png -q 100 \
-     -e 'notify-send -t 3000 "Scrot [ Entire screen ]" "Screenshot taken\n$n"' ;;
+     -e 'xclip -selection clipboard -t image/png "$f"; \
+     notify-send -t 3000 "Scrot [ Entire screen ]" "Screenshot taken\n$n"' ;;
 
 esac
