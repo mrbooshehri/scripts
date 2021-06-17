@@ -18,6 +18,7 @@ ARR+=("OBS-remote")
 ARR+=("Reddit-wall")
 ARR+=("Wallhaven-wall")
 ARR+=("Change-wall")
+ARR+=("Jupyter Lab")
 
 CHOICE=$(printf '%s\n' "${ARR[@]}" | dmenu)
 
@@ -44,4 +45,6 @@ case $CHOICE in
     ~/scripts/dmenu/dmenu-wallget.sh ;;
   "Change-wall")
     ~/scripts/dmenu/dmenu-wal-change.sh ;;
+  "Jupyter Lab")
+    ~/scripts/dmenu/dmenu-jupyter-notebook.sh ;;
 esac
