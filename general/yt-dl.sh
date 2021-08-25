@@ -5,7 +5,7 @@ if test -f "$1"; then
   do
     printf '%*s\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' =
     link=$(head -1 "$1")
-    printf "Downloading: %${link}\n"
+    printf "Downloading: %s\n" "$link"
     while ! youtube-dl "$link" -c --socket-timeout 5; do echo DISCONNECTED; sleep 5; done
     sed -i '1d' "$1" && echo "Line removed" || echo "Line didn't removed"
     printf "Done\n"
