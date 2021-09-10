@@ -8,12 +8,13 @@
 
 ARR=()
 ARR+=("Dictionary")
-ARR+=("Colorscheme")
+#ARR+=("Colorscheme")
 ARR+=("Pirokit")
 ARR+=("Ytfzf")
 ARR+=("Lyrics")
 ARR+=("Mitype")
 ARR+=("Redyt")
+ARR+=("Ambiant Music")
 ARR+=("OBS-remote")
 ARR+=("Reddit-wall")
 ARR+=("Wallhaven-wall")
@@ -25,8 +26,8 @@ CHOICE=$(printf '%s\n' "${ARR[@]}" | dmenu)
 case $CHOICE in
   "Dictionary")
     ~/scripts/dmenu/dmenu-dict.sh ;;
-  "Colorscheme")
-    ~/scripts/dmenu/dmenu-wal-colorscheme.sh ;;
+#  "Colorscheme")
+#    ~/scripts/dmenu/dmenu-wal-colorscheme.sh ;;
   "Pirokit")
     ~/.src/pirokit/pirokit ;;
   "Ytfzf")
@@ -37,6 +38,8 @@ case $CHOICE in
     ~/scripts/general/type-test.sh;;
   "Redyt")
     ~/.src/redyt/redyt ;;
+  "Ambiant Music")
+    ~/scripts/dmenu/dmenu-ambiant-music.sh ;;
   "obs-remote")
     ~/scripts/dmenu/dmenu-obs.sh ;;
   "Reddit-wall")

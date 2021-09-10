@@ -65,7 +65,6 @@ dwmc xrdb
 bash ~/.src/alacritty-color-export/script.sh
 bash ~/.src/Zathura-Pywal/install.sh
 bash ~/.src/telegram-palette-gen/telegram-palette-gen --wal
-ln -sf ~/.cache/wal/config.rasi ~/.config/rofi/config
 ln -sf ~/.cache/wal/Xresources  ~/.Xresources
 ln -sf ~/.cache/wal/light_colors.yaml ~/.config/colorls
 ln -sf ~/.cache/wal/dark_colors.yaml ~/.config/colorls
@@ -84,7 +83,7 @@ ln -sf ~/.cache/wal/dunstrc ~/.config/dunst/dunstrc
 pkill dunst
 dunst &
 
-# gtk theme 
+# gtk theme and rofi
 file_conf=~/.config/gtk-3.0/settings.ini
 
 sed -i '/gtk-theme-name/d' $file_conf
@@ -94,10 +93,12 @@ case $isDark in
   0)
     echo "gtk-theme-name=Matcha-light-aliz" >> $file_conf
     echo "gtk-icon-theme-name=deepin" >> $file_conf
+    ln -sf ~/.cache/wal/colors-rofi-light.rasi ~/.config/rofi/config
     ;;
   1)
     echo "gtk-theme-name=Matcha-dark-aliz" >> $file_conf 
     echo "gtk-icon-theme-name=deepin-dark" >> $file_conf
+    ln -sf ~/.cache/wal/colors-rofi-dark.rasi ~/.config/rofi/config
     ;;
 esac
 
