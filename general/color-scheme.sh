@@ -13,7 +13,7 @@ dwmc xrdb
 bash ~/.src/alacritty-color-export/script.sh
 bash ~/.src/Zathura-Pywal/install.sh
 bash ~/.src/telegram-palette-gen/telegram-palette-gen --wal
-ln -sf ~/.cache/wal/config.rasi ~/.config/rofi/config
+ln -sf ~/.cache/wal/colors-rofi-dark.rasi ~/.config/rofi/config
 ln -sf ~/.cache/wal/Xresources  ~/.Xresources
 ln -sf ~/.cache/wal/light_colors.yaml ~/.config/colorls
 ln -sf ~/.cache/wal/dark_colors.yaml ~/.config/colorls
