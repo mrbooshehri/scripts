@@ -13,7 +13,7 @@ sudo pacman -Syyu --noconfirm
 sudo pacman -S nvidia nvidia-utils nvidia-settings
 
 ## install base packages
-sudo pacman -S --noconfirm base-devel libx11 xorg-server xorg-init libxinerama yay vim git alacritty picom conky bluez network-manager-applet kdeconnect sxiv zathura mpv moc redshift sxhkd thunar virtualbox obs-studio code telegram-desktop torbrowser-launcher scrot neomutt inkscape lxappearance speedcrunch gedit firefox emacs bitwarden audacity gimp youtube-dl optimus-manager zsh jq pup syncthing curl stow transmission-cli dunst lxsession webkit2gtk 
+sudo pacman -S --noconfirm base-devel libx11 xorg-server xorg xorg-xinit libxinerama yay vim git alacritty picom conky bluez network-manager-applet kdeconnect sxiv zathura mpv moc redshift sxhkd thunar virtualbox obs-studio code telegram-desktop torbrowser-launcher scrot neomutt inkscape lxappearance speedcrunch gedit firefox emacs bitwarden audacity gimp youtube-dl optimus-manager zsh jq pup syncthing curl stow transmission-cli dunst lxsession webkit2gtk mpd
 
 ## update AUR packages
 yay -Syu
