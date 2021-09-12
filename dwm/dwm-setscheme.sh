@@ -45,10 +45,6 @@ bash ~/.src/telegram-palette-gen/telegram-palette-gen --wal
 cat ~/.cache/wal/xmenu >> ~/.cache/wal/colors.Xresources
 ln -sf ~/.cache/wal/colors.Xresources ~/.Xresources
 
-## conky
-ln -sf ~/.cache/wal/conkyrc ~/.conkyrc
-pkill conky
-conky &
 
 ## dunst
 ln -sf ~/.cache/wal/dunstrc ~/.config/dunst/dunstrc
@@ -68,12 +64,14 @@ case $isDark in
     echo "gtk-theme-name=Matcha-light-aliz" >> $gtk_conf
     echo "gtk-icon-theme-name=deepin" >> $gtk_conf
     echo "theme=Matchama-Light-Aliz" >> $kde_conf 
+    ln -sf ~/.cache/wal/conkyrc_light ~/.conkyrc
     ln -sf ~/.cache/wal/rofi-light ~/.config/rofi/config.rasi
     ;;
   1)
     echo "gtk-theme-name=Matcha-dark-aliz" >> $gtk_conf 
     echo "gtk-icon-theme-name=deepin-dark" >> $gtk_conf
     echo "theme=Matchama-Dark-Aliz" >> $kde_conf
+    ln -sf ~/.cache/wal/conkyrc_dark ~/.conkyrc
     ln -sf ~/.cache/wal/rofi-dark ~/.config/rofi/config.rasi
     ;;
 esac
@@ -83,6 +81,10 @@ xrdb -load ~/.Xresources
 
 # dwm
 dwmc xrdb
+
+## conky
+pkill conky
+conky &
 
 # send notification
 notify-send "Colorscheme" "[ $choice ] colorscheme selected"
