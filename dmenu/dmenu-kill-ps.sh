@@ -14,10 +14,10 @@ if [[ -n $PID ]]; then
 	# check the result of kill command and send related notification
 	case $? in
 	  "0")
-	    notify-send -t 2000 -u low "  Process terminated successfully";;
+	    notify-send -t 2000 -u lowi "Process Killer" "  Process terminated successfully";;
 	  "1")
-	    notify-send -t 2000 -u urgent "  Process termination failed";;
+	    notify-send -t 2000 -u urgent "Process Killer" "  Process termination failed";;
 	  "64")
-	    notify-send -t 2000 -u normal "  Process terminated partial successful";;
+	    notify-send -t 2000 -u normal "Process Killer" "  Process terminated partial successful";;
 	esac
 fi
