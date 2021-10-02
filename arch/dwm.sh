@@ -15,12 +15,12 @@ if [[ $aur_helper = true ]]; then
 fi
 
 # Install packages
-sudo pacman -S xorg libxinerama libx11 webkit2gtk
+sudo pacman -S xorg-xinit xorg-server xorg-xprop xorg-xsetroot xorg-xrandr xorg-xrdb xorg-xclipboard xorg-setxkbmap xorg-docs libxinerama libx11 webkit2gtk yajl mpd kitty 
 # Remove libxft
 sudo pacman -R libxft
 
 if [[ $aur_helper = true ]]; then
-  yay -Syyu --noconfitm
+  yay -Syyu 
   yay -S libxft-bgra lightdm-webkit-theme-aether 
 fi
 
@@ -30,8 +30,9 @@ cd ~/suckless
 repos=( "dmenu" "dwm" "dwmblocks" )
 for repo in ${repos[@]}
 do
-  git clone git@github.com:mrbooshehri/$repo.git
+  git clone "https://github.com/mrbooshehri/$repos.git"
   cd $repo;make;sudo make install;cd ..
+  printf ("\n\n")
 done
 
 # XSessions and dwm.desktop
