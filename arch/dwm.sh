@@ -8,18 +8,16 @@ install_ly=false
 install_lightdm=true
 gen_xprofile=false
 
-sudo timedatectl set-ntp true
-sudo hwclock --systohc
-sudo reflector -c $country -a 12 --sort rate --save /etc/pacman.d/mirrorlist
-
-#if [[ $aur_helper = true ]]; then
-#  cd /tmp
-#  git clone https://aur.archlinux.org/yay-git.git
-#  cd yay-git/;makepkg -si --noconfirm;cd
-#fi
+if [[ $aur_helper = true ]]; then
+  cd /tmp
+  git clone https://aur.archlinux.org/yay-git.git
+  cd yay-git/;makepkg -si --noconfirm;cd
+fi
 
 # Install packages
-sudo pacman -S xorg libxinerama libx11 webkit2gtk yay 
+sudo pacman -S xorg libxinerama libx11 webkit2gtk
+# Remove libxft
+sudo pacman -R libxft
 
 if [[ $aur_helper = true ]]; then
   yay -Syyu --noconfitm
@@ -32,7 +30,7 @@ cd ~/suckless
 repos=( "dmenu" "dwm" "dwmblocks" )
 for repo in ${repos[@]}
 do
-  git clone git@github.com:mrbooshehri/$repo
+  git clone git@github.com:mrbooshehri/$repo.git
   cd $repo;make;sudo make install;cd ..
 done
 
