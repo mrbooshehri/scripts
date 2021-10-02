@@ -7,18 +7,15 @@ dir_dots=$dir_home/.dotfiles
 
 ## update system
 sudo pacman -Syyu --noconfirm
- 
-#Installing Driver and related utilites
-sudo pacman -S --noconfirm nvidia nvidia-utils nvidia-settings
 
 ## install base packages
-sudo pacman -S --noconfirm alacritty picom conky kdeconnect sxiv zathura mpv moc redshift sxhkd thunar virtualbox obs-studio code telegram-desktop torbrowser-launcher scrot lxappearance speedcrunch gedit firefox emacs bitwarden gimp youtube-dl optimus-manager zsh jq pup syncthing curl stow transmission-cli dunst polkit-gnome mpd
+sudo pacman -S --noconfirm alacritty picom conky kdeconnect sxiv zathura mpv moc redshift sxhkd thunar virtualbox obs-studio code telegram-desktop torbrowser-launcher scrot lxappearance speedcrunch gedit firefox emacs bitwarden gimp youtube-dl  zsh jq syncthing stow transmission-cli dunst polkit-gnome 
 
 ## update AUR packages
 yay -Syu
 
 ## install from AUR
-yay -S anydesk-bin safeeyes balena-etcher stremio optimus-manager-qt xmenu betterlockscreen python-pywal otpclient
+yay -S anydesk-bin safeeyes balena-etcher stremio optimus-manager-qt xmenu betterlockscreen python-pywal otpclient pup optimus-manager optimus-manager-qt
 
 ## persinal scripts
 git clone https://github.com/mrbooshehri/scripts.git
