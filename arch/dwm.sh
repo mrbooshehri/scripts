@@ -1,6 +1,4 @@
 #!/bin/bash
-# Variables
-country=Germany
 
 # Options
 aur_helper=true
@@ -16,8 +14,6 @@ fi
 
 # Install packages
 sudo pacman -S xorg-xinit xorg-server xorg-xprop xorg-xsetroot xorg-xrandr xorg-xrdb xorg-xclipboard xorg-setxkbmap xorg-docs libxinerama libx11 webkit2gtk yajl mpd kitty 
-# Remove libxft
-sudo pacman -R libxft
 
 if [[ $aur_helper = true ]]; then
   yay -Syyu 
@@ -25,14 +21,12 @@ if [[ $aur_helper = true ]]; then
 fi
 
 # Pull Git repositories and install
-mkdir -p ~/suckless
-cd ~/suckless
+cd /tmp
 repos=( "dmenu" "dwm" "dwmblocks" )
 for repo in ${repos[@]}
 do
-  git clone "https://github.com/mrbooshehri/$repos.git"
+  git clone "https://github.com/mrbooshehri/$repo.git"
   cd $repo;make;sudo make install;cd ..
-  printf ("\n\n")
 done
 
 # XSessions and dwm.desktop
