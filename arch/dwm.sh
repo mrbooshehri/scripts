@@ -16,7 +16,7 @@ fi
 
 # Install packages
 printf 'Installing packages...\n'
-sudo pacman -S xorg-xinit xorg-server xorg-xprop xorg-xsetroot xorg-xrandr xorg-xrdb xorg-xclipboard xorg-setxkbmap xorg-docs libxinerama libx11 webkit2gtk yajl mpd kitty 
+sudo pacman -S webkit2gtk yajl mpd kitty 
 printf '%*s\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' =
 
 if [[ $aur_helper = true ]]; then
