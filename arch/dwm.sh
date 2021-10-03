@@ -16,7 +16,7 @@ fi
 
 # Install packages
 printf 'Installing packages...\n'
-sudo pacman -S webkit2gtk yajl mpd kitty 
+sudo pacman -S webkit2gtk yajl mpd kitty
 printf '%*s\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' =
 
 if [[ $aur_helper = true ]]; then
