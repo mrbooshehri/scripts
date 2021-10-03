@@ -22,7 +22,7 @@ printf '%*s\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' =
 ## reload config files with stow
 printf 'Restore all config files...\n'
 cd "$dir_dots" 
-stow -vt ~ $(ls -d */)
+stow -vt ~ $(ls -d */ | grep -v '^bash')
 printf '%*s\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' =
 
 ## xinit
