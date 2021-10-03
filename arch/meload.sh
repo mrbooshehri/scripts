@@ -15,7 +15,6 @@ yay -Syu
 yay -S anydesk-bin safeeyes balena-etcher stremio xmenu betterlockscreen python-pywal otpclient pup #optimus-manager optimus-manager-qt
 
 ## persinal scripts
-git clone https://github.com/mrbooshehri/scripts.git
 git clone https://github.com/mrbooshehri/.dotfiles.git
 
 ## reload config files with stow
