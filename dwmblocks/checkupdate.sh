@@ -1,4 +1,6 @@
 #! /bin/bash
 
-checkupdates | wc -l
-
+# for manjaro
+#checkupdates | wc -l
+# for arch
+pacman -Qu | grep -Fcv "[ignored]"
