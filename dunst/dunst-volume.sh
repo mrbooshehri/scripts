@@ -4,11 +4,18 @@
 # volume		
 # mute 		
 
-vol=$(amixer -c 1 -D pulse sget Master | grep '%' | head -1 | cut -d '[' -f 2 | cut -d '%' -f 1)
-mute=$(amixer -c 1 -D pulse sget Master | grep '%' | head -1 | awk -F '[][]' '{print $4}')
+#for puleaudio
+#vol=$(amixer -c 1 -D pulse sget Master | grep '%' | head -1 | cut -d '[' -f 2 | cut -d '%' -f 1)
+#mute=$(amixer -c 1 -D pulse sget Master | grep '%' | head -1 | awk -F '[][]' '{print $4}')
+#for pipwire
+vol=$(pamixer --get-volume)
+mute=$(pamixer --get-mute)
 icon=""
 
-if [ "$mute" != "on" ] ;then
+# for pulseaudio
+#if [ "$mute" != "on" ] ;then
+# for pipwire
+if [ "$mute" != "false" ] ;then
   icon=""
 fi
 

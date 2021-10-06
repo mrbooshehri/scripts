@@ -1,13 +1,23 @@
 #!/bin/bash
 
-VOL=$(amixer -c 1 -D pulse sget Master | grep 'Left:' | awk -F '[][]' '{print $2}')
-STAT=$(amixer -c 1 -D pulse sget Master | grep 'Left:' | awk -F '[][]' '{print $4}')
+# for pulseaudio
+#VOL=$(amixer -c 1 -D pulse sget Master | grep 'Left:' | awk -F '[][]' '{print $2}')
+#STAT=$(amixer -c 1 -D pulse sget Master | grep 'Left:' | awk -F '[][]' '{print $4}')
+# for pipwire
+VOL=$(pamixer --get-volume)
+STAT=$(pamixer --get-mute)
 case $STAT in 
-  off)
+# for pulseaudio
+#  off)
+# for pipwire
+  true)
 	echo " ${VOL}"
     ;;
-  on)
-    if [ $VOL == "0%" ]
+# for pulseaudio
+#  on)
+# for pipwire
+  false)
+    if [ $VOL == "0" ]
     then
 	echo " ${VOL}" 
     else

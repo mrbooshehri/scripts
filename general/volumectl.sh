@@ -1,6 +1,9 @@
 #! /bin/bash
 maxvol=100
-vol=$(amixer -c 1 -D pulse sget Master | grep 'Left:' | awk -F '[][]' '{print $2}' | cut -d% -f1)
+ # for pulseaudio
+#vol=$(amixer -c 1 -D pulse sget Master | grep 'Left:' | awk -F '[][]' '{print $2}' | cut -d% -f1)
+# for pipwire 
+vol=$(pamixer --get-volume)
 
 case $1 in
   -u)
