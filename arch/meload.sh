@@ -7,12 +7,12 @@ dir_dots=$dir_home/.dotfiles
 
 ## install base packages
 printf 'Install packages...\n'
-sudo pacman -S --noconfirm alacritty picom conky kdeconnect sxiv zathura mpv moc redshift sxhkd thunar virtualbox obs-studio code telegram-desktop torbrowser-launcher scrot lxappearance speedcrunch gedit firefox emacs bitwarden gimp youtube-dl zsh jq syncthing stow transmission-cli dunst polkit-gnome rofi neofetch nodejs
+sudo pacman -S alacritty picom conky kdeconnect sxiv zathura mpv moc redshift thunar virtualbox obs-studio telegram-desktop torbrowser-launcher scrot lxappearance speedcrunch gedit emacs bitwarden gimp youtube-dl zsh jq syncthing transmission-cli dunst polkit-gnome nodejs starship npm pamixer playerctl light
 printf '%*s\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' =
 
-## install from AUR
+### install from AUR
 printf 'Install packages from AUR...\n'
-yay -S anydesk-bin safeeyes balena-etcher stremio xmenu betterlockscreen python-pywal otpclient pup #optimus-manager optimus-manager-qt
+yay -S anydesk-bin safeeyes balena-etcher stremio xmenu betterlockscreen python-pywal otpclient pup matcha-gtk-theme pfetch #optimus-manager optimus-manager-qt
 printf '%*s\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' =
 ## persinal scripts
 printf 'Cloning personal repos...\n'
@@ -34,12 +34,16 @@ printf '%*s\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' =
 ## useful tools
 printf 'Cloning other repos...\n'
 mkdir -p "$dir_src"
-cd "$dir_src" || echo "Falied to change dirctory to $dir_src"
+cd "$dir_src" 
 git clone https://github.com/pystardust/ytfzf.git
 git clone https://github.com/Bugswriter/pirokit.git
 git clone https://github.com/egeesin/alacritty-color-export.git
 git clone https://github.com/GideonWolfe/Zathura-Pywal.git
 git clone https://github.com/agnipau/telegram-palette-gen.git
-
+mkdir -p "$dir_src/zsh"
+cd "$dir_src/zsh" 
+git clone https://github.com/zdharma/fast-syntax-highlighting.git
+git clone https://github.com/zsh-users/zsh-autosuggestions.git
+git clone https://github.com/reegnz/jq-zsh-plugin.git
 # Install node packages
-npm install -g spotify-dl
+#npm install -g spotify-dl
