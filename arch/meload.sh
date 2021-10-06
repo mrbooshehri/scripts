@@ -12,7 +12,7 @@ printf '%*s\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' =
 
 ### install from AUR
 printf 'Install packages from AUR...\n'
-yay -S anydesk-bin safeeyes balena-etcher stremio xmenu betterlockscreen python-pywal otpclient pup matcha-gtk-theme pfetch #optimus-manager optimus-manager-qt
+yay -S anydesk-bin safeeyes balena-etcher stremio xmenu betterlockscreen python-pywal otpclient pup matcha-gtk-theme pfetch glow anki #optimus-manager optimus-manager-qt
 printf '%*s\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' =
 ## persinal scripts
 printf 'Cloning personal repos...\n'
