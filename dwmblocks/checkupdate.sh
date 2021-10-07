@@ -1,6 +1,4 @@
 #! /bin/bash
 
-# for manjaro
-#checkupdates | wc -l
-# for arch
-pacman -Qu | grep -Fcv "[ignored]"
+# for arch install `pacman-contrib` first
+checkupdates | wc -l
