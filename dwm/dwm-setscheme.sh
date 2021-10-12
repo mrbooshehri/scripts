@@ -27,6 +27,9 @@ case $choice in
   "solarized-light")
     wal --theme base16-solarized -l
     isDark=0 ;;
+   *)
+    notify-send "Colorscheme" "Select valid colorscheme"
+    exit
 esac
 
 
