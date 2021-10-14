@@ -50,7 +50,7 @@ sorting=$(echo -e $sortoptions | dmenu -p "Sort order: ")
 [ -z "$sorting" ] && exit 1
 
 #           "Title"   "Message"
-notify-send "Wallget" "  Downloading..."
+notify-send "Wallhavan" "  Downloading..."
 
 for i in $(seq 1 5);
 do
@@ -59,13 +59,17 @@ do
   wget -nc -P $dir_tmp $page
 done
 
-notify-send "Wallget" "  All files have downloaded"
+notify-send "Wallhavan" "  All files have downloaded"
 #
 # Show downloaded files
 sxiv -t $dir_tmp/*
 
 # Remove temp files
 rm tmp.txt
-mv $dir_tmp/* $dir_repo
 
-notify-send "Wallget" "  Files moved to $dir_repo"
+if [ "$(ls $dir_tmp | wc -l)" -ne "0" ];then
+  mv $dir_tmp/* $dir_repo
+  notify-send "Wallhaven" "  Files moved"
+else
+ notify-send "Wallhaven" "  There is no file to move!"
+fi
