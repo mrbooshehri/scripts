@@ -20,11 +20,11 @@ subreddit=$(echo -e "wallpaper\nwallpapers\nMinimalWallpaper\nportraits" | dmenu
 sort_option=$(echo -e "hot\nnew\ntop" | dmenu -p "Sort option: ")
 [ -z "$sort_option" ] && exit 1
 
-notify-send "Waldl" "  Downloading..."
+notify-send "Reddit Waldl" "  Downloading..."
 
 wget -qnc -P $dir_tmp $(curl -s -H "User-Agent: 'your bot 0.1'"  https://www.reddit.com/r/$subreddit/$sort_option.json\?limit\=100 | jq --raw-output '.data.children[].data.url' | grep -Eoh 'https://.+.[jpg,png]$')
 
-notify-send "Waldl" "  All files have downloaded"
+notify-send "Reddit Waldl" "  All files have downloaded"
 
 find $dir_tmp \! -iname '*.jpg' -delete
 
@@ -32,9 +32,9 @@ sxiv -t $dir_tmp/*
 
 if [ "$(ls $dir_tmp | wc -l)" -ne "0" ];then
   mv $dir_tmp/* $dir_repo
-  notify-send "Waldl" "  Files moved"
+  notify-send "Reddit Waldl" "  Files moved"
 else
- notify-send "  There is no file to move!"
+ notify-send "Reddit Waldl" "  There is no file to move!"
 fi
 
 
