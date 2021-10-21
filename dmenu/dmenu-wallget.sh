@@ -19,48 +19,60 @@ dir_tmp="/tmp/wallpaper"
 # API Key
 api=9VxdYyf7irmZl8tIv6x6BSy7bylSKtUb
 
-# Create .config/wallget if it does not exist to prevent
-# the program from not functioning properly
+# Create confing directory under .config
 [ ! -d "$dir_conf" ] && echo "Creating $dir_conf" && mkdir -p "$dir_conf"
 
-## Sample tag
-header="#Category\t\t\tTag"
-default="Minimalism\t\t\t2278"
+# Sample tags
+[ ! -f "$dir_conf/config.txt" ] && cat > "$dir_conf/config.txt" << EOT
+#Category			Tag
+Top				top
+Random				random
+Latest				latest
+Hot				views
+Minimalism			2278
+EOT
 
-# If subbreddit.txt does not exist, create it to prevent
-# the program from not functioning properly
-[ ! -f "$dir_conf/config.txt" ] && echo -e "$header\n$default" >> "$dir_conf/config.txt"
-
-# If no argument is passed
+# If no argument is passed - you can call it from terminal too
 if [ -z "$1" ]; then
-	# Ask the user to enter a subreddit
+	# Ask the user to chose or enter a title
 	query=$(tail -n +2 $dir_conf/config.txt | awk '{print $1}' | dmenu )
 	# Fetch tag number from config file if it exists
-	[ ! -z "$(grep $query $dir_conf/config.txt)" ] && $query=$(awk '/$query/ {print $2} $dir_conf/config.txt')
+	[ ! -z "$(grep $query $dir_conf/config.txt)" ] && $query=$(awk '/$query/ {print $2}' $dir_conf/config.txt)
 	# If nothing was chosen, exit
 	[ -z "$query" ] && exit 1
 else
 	query="$1"
 fi
-echo $query
 
-# Asking for sorting option
-sortoptions="date_added\nrelevance\nrandom\nfavorites\ntoplist"
-sorting=$(echo -e $sortoptions | dmenu -p "Sort order: ")
-[ -z "$sorting" ] && exit 1
+case $query in
+  "Top") 
+    link_dl="https://wallhaven.cc/api/v1/search?apikey=$api&atleast=1920x1080&sorting=toplist" ;;
+  "Random")
+    link_dl="https://wallhaven.cc/api/v1/search?apikey=$api&atleast=1920x1080&sorting=random" ;;
+  "Latest")
+    link_dl="https://wallhaven.cc/api/v1/search?apikey=$api&atleast=1920x1080&sorting=date_added" ;;
+  "Hot")
+    link_dl="https://wallhaven.cc/api/v1/search?apikey=$api&atleast=1920x1080&sorting=views" ;;
+  *)
+    # Asking for sorting option
+    sortoptions="date_added\nrelevance\nrandom\nfavorites\ntoplist"
+    sorting=$(echo -e $sortoptions | dmenu -p "Sort order: ")
+    [ -z "$sorting" ] && exit 1
+    link_dl="https://wallhaven.cc/api/v1/search?apikey=$api&atleast=1920x1080&sorting=$sorting&q=$query"
+    ;;
+esac
 
-#           "Title"   "Message"
 notify-send "Wallhavan" "  Downloading..."
 
 for i in $(seq 1 5);
 do
-  curl -s https://wallhaven.cc/api/v1/search\?apikey\=$api\&atleast\=1920x1080\&sorting\=$sorting\&q\=$query\&page\=$i > tmp.txt
+  curl "$link_dl&page=$i" > tmp.txt
   page=$(cat tmp.txt | jq --raw-output '.data[].path')
   wget -nc -P $dir_tmp $page
 done
 
 notify-send "Wallhavan" "  All files have downloaded"
-#
+
 # Show downloaded files
 sxiv -t $dir_tmp/*
 
