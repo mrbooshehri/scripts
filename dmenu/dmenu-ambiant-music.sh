@@ -1,9 +1,11 @@
 #! /usr/bin/env bash
 gnr=()
 gnr+=("Lofi")
-gnr+=("Relaxing")
-gnr+=("Rap")
+gnr+=("Ocean")
 gnr+=("Piano")
+gnr+=("Rain")
+gnr+=("Rap")
+gnr+=("Relaxing")
 gnr+=("Tibetian Bowl")
 
 choice=$(printf "Play\nStop" | dmenu -p "Ambiant Music:")
@@ -18,6 +20,12 @@ case $choice in
       "Relaxing")
 	notify-send "Ambiant Music" "[ Relaxing ] selected and will play soon"
 	mpv https://www.youtube.com/watch?v=uYZSDsdY9Zs --no-video ;;
+      "Rain")
+	notify-send "Ambiant Music" "[ Rap ]selected and will play soon"
+	mpv https://www.youtube.com/watch?v=6Jrj7uIcfd4 --no-video ;;
+      "Ocean")
+	notify-send "Ambiant Music" "[ Rap ]selected and will play soon"
+	mpv https://www.youtube.com/watch?v=rZ7VVGvrfiA --no-video ;;
       "Rap")
 	notify-send "Ambiant Music" "[ Rap ]selected and will play soon"
 	mpv https://www.youtube.com/watch?v=n4pr7j-kTO0 --no-video ;;
