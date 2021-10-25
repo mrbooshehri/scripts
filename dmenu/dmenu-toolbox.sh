@@ -20,6 +20,8 @@ ARR+=("Reddit-wall")
 ARR+=("Wallhaven-wall")
 ARR+=("Change-wall")
 ARR+=("Jupyter Lab")
+ARR+=("Passgen")
+ARR+=("Usergen")
 
 CHOICE=$(printf '%s\n' "${ARR[@]}" | dmenu)
 
@@ -50,4 +52,12 @@ case $CHOICE in
     ~/scripts/dmenu/dmenu-wal-change.sh ;;
   "Jupyter Lab")
     ~/scripts/dmenu/dmenu-jupyter-notebook.sh ;;
+  "Passgen")
+    ~/Projects/python/pass_generator/passgen.py -c 
+    notify-send "Passgen" "Password copied in your clipboard"
+    ;;
+  "Usergen")
+    ~/scripts/bash/genuname.sh -n | xsel -bi
+    notify-send "Genunam" "Username copied in your clipboard"
+    ;;
 esac
