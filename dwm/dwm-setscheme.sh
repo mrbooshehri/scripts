@@ -89,6 +89,9 @@ dwmc xrdb
 pkill conky
 conky &
 
+# update forefox theme
+~/.local/bin/pywalfox update
+
 # send notification
 notify-send "Colorscheme" "[ $choice ] colorscheme selected"
 
