@@ -7,7 +7,7 @@ dir_dots=$dir_home/.dotfiles
 
 ## install base packages
 printf 'Install packages...\n'
-sudo pacman -S alacritty picom conky kdeconnect sxiv zathura mpv moc redshift thunar virtualbox obs-studio telegram-desktop torbrowser-launcher scrot lxappearance speedcrunch gedit emacs bitwarden gimp youtube-dl zsh jq syncthing transmission-cli dunst polkit-gnome nodejs starship npm pamixer playerctl light
+sudo pacman -S alacritty picom conky kdeconnect sxiv zathura mpv moc redshift thunar tumbler virtualbox obs-studio telegram-desktop torbrowser-launcher scrot lxappearance speedcrunch gedit emacs bitwarden gimp youtube-dl zsh jq syncthing transmission-cli dunst polkit-gnome nodejs starship npm pamixer playerctl light
 printf '%*s\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' =
 
 ### install from AUR
