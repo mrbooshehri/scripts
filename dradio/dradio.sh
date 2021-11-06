@@ -17,15 +17,41 @@ AutoDJ lofi		http://119.235.255.206:8158/listen.pls?sid=1&t=.m3u
 EOF
 
 case $1 in
-  "-p")
+  "-d")
 	choice=$(grep -v '^#' "$dir_home/stations.txt" | awk -F '\t' '{print $1}' | dmenu -l 15 -p "Radio stations: ")
 	[ -z "$choice" ] && exit 1
 	station_url=$(grep "$choice" "$dir_home/stations.txt" | awk -F '\t' '{print $(NF)}')
-	notify-send "dradio" "[ $choice ] station is playing"
-	mpv $station_url
+	nohup mpv $station_url 2&>/dev/null &
+	if [ $? -eq 0 ];then
+	  notify-send "dradio" "[ $choice ] station is playing"
+	else
+	  notify-send "dradio" "Error in playing with mpv"
+	fi
 	;;
-  "-s") killall mpv ;;
-  "-h") echo "-p	Play radio station"
+  "-s") killall mpv 2&>/dev/null ;;
+  "-f")	choice=$(grep -v '^#' "$dir_home/stations.txt" | awk -F '\t' '{print $1}' | fzf)
+	[ -z "$choice" ] && exit 1
+	station_url=$(grep "$choice" "$dir_home/stations.txt" | awk -F '\t' '{print $(NF)}')
+	nohup mpv $station_url 2&>/dev/null &
+	if [ ! $? -eq 0 ];then
+	 echo "Error in playing with mpv"
+	fi
+  	;;
+  "-l") less $dir_home/stations.txt ;;
+  "-a") echo "Enter station name: "
+    	read name
+	echo "Enter station URL: "
+    	read url
+	echo -e "$name\t\t$url" >> $dir_home/stations.txt
+  ;;
+  "-r") station=$(cat $dir_home/stations.txt | fzf | awk -F '\t' '{print $1}')
+    	sed -i "/${station}/d" $dir_home/stations.txt &2> /dev/null
+  ;;
+  "-h"|*) echo "-l	List of radio staions"
+        echo "-d	Show stations list in dmenu"
+ 	echo "-f	Show stations list in fzf"
 	echo "-s	Stop mpv player"
-    ;;
+	echo "-a	Add staion"
+	echo "-r	Remove station"
+    	;;
 esac
