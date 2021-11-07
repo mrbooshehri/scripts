@@ -71,8 +71,7 @@ case $1 in
   "-s"|"--stop") 
   	killall mpv 2&>/dev/null ;;
   "-u"|"--url") 
-	[[ $2 =~ $url_pattern ]] && play $2 url || echo "Invalid URL. Please see help"
-  ;;
+	[[ $2 =~ $url_pattern ]] && play $2 url || echo "Invalid URL. Please see help" ;;
   "-v"|"--version") echo "dradio V0.2" ;;
   "-h"|"--help"|*) 
     	cat << EOF
