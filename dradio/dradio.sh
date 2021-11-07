@@ -1,4 +1,5 @@
 #!/bin/bash
+url_pattern="https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()!@:%_\+.~#?&\/\/=]*)"
 # Check requirement programs
 for prog in dmenu mpv; do
 	[ ! "$(which "$prog")" ] && echo "Please install $prog!" && exit 1
@@ -19,6 +20,16 @@ Kraftphunk		http://62.210.10.4:8096/listen.pls?sid=1&t=.m3u
 AutoDJ lofi		http://119.235.255.206:8158/listen.pls?sid=1&t=.m3u
 EOF
 
+# Functions
+play(){
+  nohup mpv $station_url --no-video 2&>/dev/null &
+  if [ $1 == "dmenu" ];then
+    [[ $? -eq 0 ]] && notify-send "dradio" "[ $choice ] station is playing" || notify-send "dradio" "Error in playing with mpv"
+    elif [ $1 == "fzf" ];then
+    [[ $? -eq 0 ]] && echo "[ $choice ] station is playing." || echo "Error in playing with mpv."
+  fi
+}
+
 case $1 in
   "-d"|"--dmenu")
     	# List stations from ~/.config/dradio/stations.txt in dmenu and play the selected one in mpv
@@ -26,37 +37,39 @@ case $1 in
 	[ -z "$choice" ] && exit 1
 	station_url=$(grep "$choice" "$dir_home/stations.txt" | awk -F '\t' '{print $(NF)}')
 	nohup mpv $station_url --no-video 2&>/dev/null &
-	if [ $? -eq 0 ];then
-	  notify-send "dradio" "[ $choice ] station is playing"
-	else
-	  notify-send "dradio" "Error in playing with mpv"
-	fi
+	play dmenu
   ;;
   	# Stop playing 
-  "-s"|"--stop") killall mpv 2&>/dev/null ;;
+  "-s"|"--stop") 
+  	killall mpv 2&>/dev/null ;;
     	# List stations from ~/.config/dradio/stations.txt in fzf and play the selected one in mpv
-  "-f"|"--fzf")	choice=$(grep -v '^#' "$dir_home/stations.txt" | awk -F '\t' '{print $1}' | fzf)
+  "-f"|"--fzf")	
+  	choice=$(grep -v '^#' "$dir_home/stations.txt" | awk -F '\t' '{print $1}' | fzf)
 	[ -z "$choice" ] && exit 1
 	station_url=$(grep "$choice" "$dir_home/stations.txt" | awk -F '\t' '{print $(NF)}')
 	nohup mpv $station_url --no-video 2&>/dev/null &
-	if [ ! $? -eq 0 ];then
-	 echo "Error in playing with mpv"
-	fi
+	play fzf
   ;;
   	# Show the list of stations in ~/.config/dradio/stations.txt
-  "-l"|"--list") less $dir_home/stations.txt ;;
+  "-l"|"--list") 
+  	less $dir_home/stations.txt ;;
   	# Add new station
-  "-a"|"--add") echo "Enter station name: "
+  "-a"|"--add") 
+  	echo "Enter station name: "
     	read name
 	echo "Enter station URL: "
     	read url
 	echo -e "$name\t\t$url" >> $dir_home/stations.txt
   ;;
   	# Remove existing stations
-  "-r"|"--remove") station=$(cat $dir_home/stations.txt | fzf | awk -F '\t' '{print $1}')
+  "-r"|"--remove") 
+  	station=$(cat $dir_home/stations.txt | fzf | awk -F '\t' '{print $1}')
 	[ -z "$station" ] && exit 1
     	line=$(grep -n $station $dir_home/stations.txt | cut -d ':' -f 1)
     	sed -i "${line}d" $dir_home/stations.txt &2> /dev/null
+  ;;
+"-u"|"--url") 
+	[[ $2 =~ $url_pattern ]] && echo "it is ok" || echo "see help"
   ;;
   "-h"|"--help"|*) 
     	echo "-l, --list	List of radio staions"
