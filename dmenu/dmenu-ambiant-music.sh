@@ -12,30 +12,37 @@ choice=$(printf "Play\nStop" | dmenu -p "Ambiant Music:")
 
 case $choice in 
   "Play")
-    link=$(printf '%s\n' "${gnr[@]}" | dmenu)
-    case $link in 
+    item=$(printf '%s\n' "${gnr[@]}" | dmenu)
+    case $item in 
       "Lofi")
-	notify-send "Ambiant Music" "[ Lofi ] selected and will play soon"
-	mpv https://www.youtube.com/watch?v=5qap5aO4i9A --no-video ;;
+	item_name=Lofi
+	url=https://www.youtube.com/watch?v=5qap5aO4i9A ;;
       "Relaxing")
-	notify-send "Ambiant Music" "[ Relaxing ] selected and will play soon"
-	mpv https://www.youtube.com/watch?v=uYZSDsdY9Zs --no-video ;;
+	item_name=Relaxing
+	url=https://www.youtube.com/watch?v=uYZSDsdY9Zs ;;
       "Rain")
-	notify-send "Ambiant Music" "[ Rap ]selected and will play soon"
-	mpv https://www.youtube.com/watch?v=6Jrj7uIcfd4 --no-video ;;
+	item_name=Rain
+	url=https://www.youtube.com/watch?v=zJVX4E6DtjI ;;
       "Ocean")
-	notify-send "Ambiant Music" "[ Rap ]selected and will play soon"
-	mpv https://www.youtube.com/watch?v=rZ7VVGvrfiA --no-video ;;
+	item_name=Ocean
+	url=https://www.youtube.com/watch?v=rZ7VVGvrfiA ;;
       "Rap")
-	notify-send "Ambiant Music" "[ Rap ]selected and will play soon"
-	mpv https://www.youtube.com/watch?v=n4pr7j-kTO0 --no-video ;;
+	item_name=Rap
+	url=https://www.youtube.com/watch?v=n4pr7j-kTO0 ;;
       "Piano")
-	notify-send "Ambiant Music" "[ Piano ]selected and will play soon"
-	mpv https://www.youtube.com/watch?v=XULUBg_ZcAU --no-video ;;
+	item_name=Piano
+	url=https://www.youtube.com/watch?v=XULUBg_ZcAU ;;
       "Tibetian Bowl")
-	notify-send "Ambiant Music" "[ Tibetian Bowl ]selected and will play soon"
-	mpv https://www.youtube.com/watch?v=Y6QTdvbu0uI --no-video ;; 
-    esac ;;
+	item_name=Tibetian Bowl
+	url=https://www.youtube.com/watch?v=Y6QTdvbu0uI ;; 
+    esac 
+    mpv $url --no-video &
+    if [ $? -eq 0 ];then
+	notify-send "Ambiant Music" "[ $item_name ] selected and will play soon"
+      else
+	notify-send "Ambiant Music" "Error. Please check your URL"
+    fi
+    ;;
    "Stop")
      killall mpv ;;
 esac
