@@ -1,5 +1,4 @@
 #!/bin/bash
-url_pattern="https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()!@:%_\+.~#?&\/\/=]*)"
 # Check requirement programs
 for prog in dmenu mpv; do
 	[ ! "$(which "$prog")" ] && echo "Please install $prog!" && exit 1
@@ -20,14 +19,21 @@ Kraftphunk		http://62.210.10.4:8096/listen.pls?sid=1&t=.m3u
 AutoDJ lofi		http://119.235.255.206:8158/listen.pls?sid=1&t=.m3u
 EOF
 
+# Other variables 
+url_pattern="https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()!@:%_\+.~#?&\/\/=]*)"
+
 # Functions
 play(){
-  nohup mpv $station_url --no-video 2&>/dev/null &
-  if [ $1 == "dmenu" ];then
-    [[ $? -eq 0 ]] && notify-send "dradio" "[ $choice ] station is playing" || notify-send "dradio" "Error in playing with mpv"
-    elif [ $1 == "fzf" ];then
-    [[ $? -eq 0 ]] && echo "[ $choice ] station is playing." || echo "Error in playing with mpv."
-  fi
+  nohup mpv $1 --stop-playback-on-init-failure --no-video 2&>/dev/null &
+  case $2 in
+    "dmenu") 
+    	[[ $? -eq 0 ]] && notify-send "dradio" "[ $choice ] station is playing" || notify-send "dradio" "Error in playing with mpv" ;;
+    "fzf") 
+    	[[ $? -eq 0 ]] && echo "[ $choice ] station is playing." || echo "Error in playing with mpv." ;;
+    "url") 
+    	[[ $? -eq 0 ]] && echo "Play URL: $1" || echo "Error in playing URL" ;;
+    *) exit 0;;
+  esac
 }
 
 case $1 in
@@ -36,8 +42,7 @@ case $1 in
 	choice=$(grep -v '^#' "$dir_home/stations.txt" | awk -F '\t' '{print $1}' | dmenu -l 15 -p "Radio stations: ")
 	[ -z "$choice" ] && exit 1
 	station_url=$(grep "$choice" "$dir_home/stations.txt" | awk -F '\t' '{print $(NF)}')
-	nohup mpv $station_url --no-video 2&>/dev/null &
-	play dmenu
+	play $station_url dmenu
   ;;
   	# Stop playing 
   "-s"|"--stop") 
@@ -47,18 +52,15 @@ case $1 in
   	choice=$(grep -v '^#' "$dir_home/stations.txt" | awk -F '\t' '{print $1}' | fzf)
 	[ -z "$choice" ] && exit 1
 	station_url=$(grep "$choice" "$dir_home/stations.txt" | awk -F '\t' '{print $(NF)}')
-	nohup mpv $station_url --no-video 2&>/dev/null &
-	play fzf
+	play $station_url fzf
   ;;
   	# Show the list of stations in ~/.config/dradio/stations.txt
   "-l"|"--list") 
   	less $dir_home/stations.txt ;;
   	# Add new station
   "-a"|"--add") 
-  	echo "Enter station name: "
-    	read name
-	echo "Enter station URL: "
-    	read url
+    	read -e -p "Enter station name: " name 
+    	read -e -p "Enter station URL: " url
 	echo -e "$name\t\t$url" >> $dir_home/stations.txt
   ;;
   	# Remove existing stations
@@ -68,16 +70,21 @@ case $1 in
     	line=$(grep -n $station $dir_home/stations.txt | cut -d ':' -f 1)
     	sed -i "${line}d" $dir_home/stations.txt &2> /dev/null
   ;;
-"-u"|"--url") 
-	[[ $2 =~ $url_pattern ]] && echo "it is ok" || echo "see help"
+  "-u"|"--url") 
+	[[ $2 =~ $url_pattern ]] && play $2 url || echo "Invalid URL. Please see help"
   ;;
+  "-v"|"--version") echo "dradio V0.2" ;;
   "-h"|"--help"|*) 
-    	echo "-l, --list	List of radio staions"
-        echo "-d, --delete	Show stations list in dmenu"
- 	echo "-f, --fzf		Show stations list in fzf"
-	echo "-s, --stop	Stop mpv player"
-	echo "-a, --add 	Add staion"
-	echo "-r, --remove	Remove station"
-	echo "-h, --help	Show help"
+    	cat << EOF
+-l, --list		List of radio staions
+-d, --delete		Show stations list in dmenu
+-f, --fzf		Show stations list in fzf
+-s, --stop		Stop mpv player
+-a, --add 		Add staion
+-r, --remove		Remove station
+-u, --url		Play input URL
+-h, --help		Show help
+-v, --version		Show version
+EOF
   ;;
 esac
