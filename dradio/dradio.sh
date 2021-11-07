@@ -37,6 +37,12 @@ play(){
 }
 
 case $1 in
+  # Add new station
+  "-a"|"--add") 
+    	read -e -p "Enter station name: " name 
+    	read -e -p "Enter station URL: " url
+	echo -e "$name\t\t$url" >> $dir_home/stations.txt
+  ;;
   "-d"|"--dmenu")
     	# List stations from ~/.config/dradio/stations.txt in dmenu and play the selected one in mpv
 	choice=$(grep -v '^#' "$dir_home/stations.txt" | awk -F '\t' '{print $1}' | dmenu -l 15 -p "Radio stations: ")
@@ -44,32 +50,26 @@ case $1 in
 	station_url=$(grep "$choice" "$dir_home/stations.txt" | awk -F '\t' '{print $(NF)}')
 	play $station_url dmenu
   ;;
-  	# Stop playing 
-  "-s"|"--stop") 
-  	killall mpv 2&>/dev/null ;;
-    	# List stations from ~/.config/dradio/stations.txt in fzf and play the selected one in mpv
+  # List stations from ~/.config/dradio/stations.txt in fzf and play the selected one in mpv
   "-f"|"--fzf")	
   	choice=$(grep -v '^#' "$dir_home/stations.txt" | awk -F '\t' '{print $1}' | fzf)
 	[ -z "$choice" ] && exit 1
 	station_url=$(grep "$choice" "$dir_home/stations.txt" | awk -F '\t' '{print $(NF)}')
 	play $station_url fzf
   ;;
-  	# Show the list of stations in ~/.config/dradio/stations.txt
+  # Show the list of stations in ~/.config/dradio/stations.txt
   "-l"|"--list") 
-  	less $dir_home/stations.txt ;;
-  	# Add new station
-  "-a"|"--add") 
-    	read -e -p "Enter station name: " name 
-    	read -e -p "Enter station URL: " url
-	echo -e "$name\t\t$url" >> $dir_home/stations.txt
-  ;;
-  	# Remove existing stations
+  	grep -v '^#' $dir_home/stations.txt | less ;;
+  # Remove existing stations
   "-r"|"--remove") 
   	station=$(cat $dir_home/stations.txt | fzf | awk -F '\t' '{print $1}')
 	[ -z "$station" ] && exit 1
     	line=$(grep -n $station $dir_home/stations.txt | cut -d ':' -f 1)
     	sed -i "${line}d" $dir_home/stations.txt &2> /dev/null
   ;;
+  # Stop playing 
+  "-s"|"--stop") 
+  	killall mpv 2&>/dev/null ;;
   "-u"|"--url") 
 	[[ $2 =~ $url_pattern ]] && play $2 url || echo "Invalid URL. Please see help"
   ;;
