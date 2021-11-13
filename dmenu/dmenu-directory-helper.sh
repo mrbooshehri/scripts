@@ -4,11 +4,17 @@ choice=$(echo -e "/home\n/mnt" | dmenu -p "Select path: ")
 [ -z "$choice" ] && exit 1
 
 case $choice in
-  "/home") select=$(find ~ -maxdepth 3 -type d 2>/dev/null | cut -d "/" -f 4- | tail -n +2 | sort | dmenu -l 15)
-    dir_home=/home/mhmd
+  "/home") 
+    dir_home=$HOME
+    select=$(find $dir_home -maxdepth 3 -type d 2>/dev/null | cut -d "/" -f 4- | tail -n +2 | sort | dmenu -l 15)
     ;;
-  "/mnt") select=$(find /mnt/1TB/ -maxdepth 3 -type d 2>/dev/null | cut -d "/" -f 4- | tail -n +2 | sort | dmenu -l 15) 
+  "/mnt") 
     dir_home=/mnt/1TB
+    select=$(find $dir_home -maxdepth 3 -type d 2>/dev/null | cut -d "/" -f 4- | tail -n +2 | sort | dmenu -l 15) 
+    ;;
+  *)
+    [[ -d $choice ]] && dir_home="$choice" || notify-send "Directory Helper" "Invalid path"
+    select=$(find $dir_home -maxdepth 3 -type d 2>/dev/null | tail -n +2 | sort | dmenu -l 15) 
     ;;
 esac
 
