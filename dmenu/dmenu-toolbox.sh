@@ -14,6 +14,7 @@ ARR+=("Ytfzf")
 ARR+=("Lyrics")
 ARR+=("Mitype")
 ARR+=("Redyt")
+ARR+=("dradio")
 ARR+=("Ambiant Music")
 ARR+=("OBS-remote")
 ARR+=("Reddit-wall")
@@ -40,6 +41,8 @@ case $CHOICE in
     ~/scripts/general/type-test.sh;;
   "Redyt")
     ~/.src/redyt/redyt ;;
+  "dradio")
+    dradio -d ;;
   "Ambiant Music")
     ~/scripts/dmenu/dmenu-ambiant-music.sh ;;
   "obs-remote")
