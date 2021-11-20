@@ -4,7 +4,7 @@ mpv_arg=https://youtube.com/playlist?list=
 play(){
   stop
   if [ ! -z $1 ];then 
-    PL=`echo 1$ | awk -F 'list=' '{print $2}'`
+    PL=`echo $1 | awk -F 'list=' '{print $2}'`
     nohup mpv --title=ytplp --shuffle --stop-playback-on-init-failure --no-video --input-ipc-server=/tmp/mpvsocket "$mpv_arg$PL" 2&>/dev/null & 
     notify-send "MPV-ytp" "Playlist going to play"
   else
