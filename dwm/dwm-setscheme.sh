@@ -69,6 +69,7 @@ case $isDark in
     echo "theme=Matchama-Light-Aliz" >> $kde_conf 
     ln -sf ~/.cache/wal/conkyrc_light ~/.conkyrc
     ln -sf ~/.cache/wal/rofi-light ~/.config/rofi/config.rasi
+    ln -sf ~/.dotfiles/userChrome-waterfall-light.css ~/.mozilla/firefox/6bfttlg7.default-release/chrome/userChrome.css
     ;;
   1)
     echo "gtk-theme-name=Matcha-dark-aliz" >> $gtk_conf 
@@ -76,6 +77,7 @@ case $isDark in
     echo "theme=Matchama-Dark-Aliz" >> $kde_conf
     ln -sf ~/.cache/wal/conkyrc_dark ~/.conkyrc
     ln -sf ~/.cache/wal/rofi-dark ~/.config/rofi/config.rasi
+    ln -sf ~/.dotfiles/userChrome-waterfall-dark.css ~/.mozilla/firefox/6bfttlg7.default-release/chrome/userChrome.css
     ;;
 esac
 
