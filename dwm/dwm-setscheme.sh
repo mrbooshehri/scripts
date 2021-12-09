@@ -14,18 +14,28 @@ choice=$(printf "%s\n" "${themes[@]}" | dmenu)
 
 case $choice in
   "dracula")
-    wal --theme base16-dracula ;;
+    wal --theme base16-dracula 
+    ffcss=~/.dotfiles/firefox-custom-css/waterfall-dracula.css
+    ;;
   "gruvbox-dark")
-    wal --theme base16-gruvbox-medium ;;
+    wal --theme base16-gruvbox-medium 
+    ffcss=~/.dotfiles/firefox-custom-css/waterfall-gruvbox-dark.css
+    ;;
   "gruvbox-light")
     wal --theme base16-gruvbox-medium -l 
+    ffcss=~/.dotfiles/firefox-custom-css/waterfall-gruvbox-light.css
     isDark=0 ;;
   "nord")
-    wal --theme base16-nord;;
+    wal --theme base16-nord
+    ffcss=~/.dotfiles/firefox-custom-css/waterfall-nord.css
+    ;;
   "solarized-dark")
-    wal --theme base16-solarized ;;
+    wal --theme base16-solarized 
+    ffcss=~/.dotfiles/firefox-custom-css/waterfall-solarized-dark.css
+    ;;
   "solarized-light")
     wal --theme base16-solarized -l
+    ffcss=~/.dotfiles/firefox-custom-css/waterfall-solarized-light.css
     isDark=0 ;;
    *)
     notify-send "Colorscheme" "Select valid colorscheme"
@@ -69,7 +79,7 @@ case $isDark in
     echo "theme=Matchama-Light-Aliz" >> $kde_conf 
     ln -sf ~/.cache/wal/conkyrc_light ~/.conkyrc
     ln -sf ~/.cache/wal/rofi-light ~/.config/rofi/config.rasi
-    ln -sf ~/.dotfiles/userChrome-waterfall-light.css ~/.mozilla/firefox/6bfttlg7.default-release/chrome/userChrome.css
+    ln -sf ~/.dotfiles/firefox-custom-css/waterfall-light.css ~/.mozilla/firefox/6bfttlg7.default-release/chrome/userChrome.css
     ;;
   1)
     echo "gtk-theme-name=Matcha-dark-aliz" >> $gtk_conf 
@@ -77,9 +87,11 @@ case $isDark in
     echo "theme=Matchama-Dark-Aliz" >> $kde_conf
     ln -sf ~/.cache/wal/conkyrc_dark ~/.conkyrc
     ln -sf ~/.cache/wal/rofi-dark ~/.config/rofi/config.rasi
-    ln -sf ~/.dotfiles/userChrome-waterfall-dark.css ~/.mozilla/firefox/6bfttlg7.default-release/chrome/userChrome.css
     ;;
 esac
+
+# set firefox css
+    ln -sf "$ffcss" ~/.mozilla/firefox/6bfttlg7.default-release/chrome/userChrome.css
 
 # reload xresources file
 xrdb -load ~/.Xresources
