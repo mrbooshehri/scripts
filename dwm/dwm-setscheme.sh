@@ -77,7 +77,7 @@ case $isDark in
     echo "gtk-theme-name=Matcha-light-aliz" >> $gtk_conf
     echo "gtk-icon-theme-name=deepin" >> $gtk_conf
     echo "theme=Matchama-Light-Aliz" >> $kde_conf 
-    ln -sf ~/.cache/wal/conkyrc_light ~/.conkyrc
+    ln -sf ~/.cache/wal/conkyrc_one_line_light ~/.conkyrc
     ln -sf ~/.cache/wal/rofi-light ~/.config/rofi/config.rasi
     ln -sf ~/.dotfiles/firefox-custom-css/waterfall-light.css ~/.mozilla/firefox/6bfttlg7.default-release/chrome/userChrome.css
     ;;
@@ -85,7 +85,7 @@ case $isDark in
     echo "gtk-theme-name=Matcha-dark-aliz" >> $gtk_conf 
     echo "gtk-icon-theme-name=deepin-dark" >> $gtk_conf
     echo "theme=Matchama-Dark-Aliz" >> $kde_conf
-    ln -sf ~/.cache/wal/conkyrc_dark ~/.conkyrc
+    ln -sf ~/.cache/wal/conkyrc_one_line_dark ~/.conkyrc
     ln -sf ~/.cache/wal/rofi-dark ~/.config/rofi/config.rasi
     ;;
 esac
@@ -100,7 +100,7 @@ xrdb -load ~/.Xresources
 dwmc xrdb
 
 ## conky
-pkill conky
+killall conky
 conky &
 
 # update forefox theme
